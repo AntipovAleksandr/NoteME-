@@ -12,7 +12,7 @@ public class DataHandler {
 
     SQLiteDatabase sqLiteDatabase;
 
-    public static final String CONTACTS_TABLE_NAME = "mailsTable";
+    public static final String CONTACTS_TABLE_NAME = "contactTable";
     public static final String DATA_BASE_NAME = "myDataBase";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE = "CREATE TABLE contactTable(contactID TEXT, filePath TEXT, name TEXT, mail TEXT, number TEXT, description TEXT);";
