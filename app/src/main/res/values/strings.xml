@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">NoteMe</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_aga">Aga</string>
+    <string name="email">Email</string>
+    <string name="number">Number</string>
+    <string name="description">Description</string>
+    <string name="hint">Mail</string>
+    <string name="hint2">Number</string>
+    <string name="hint3">Description</string>
+    <string name="btn_save">Save</string>
+    <string name="add_photo">add_photo</string>
+    <string name="name">Name</string>
+    <string name="hint1">Name</string>
+</resources>
