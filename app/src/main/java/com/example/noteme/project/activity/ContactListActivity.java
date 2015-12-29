@@ -7,13 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.noteme.R;
-import com.example.noteme.project.adapter.MyAdapter;
-import com.example.noteme.project.database.DataHandler;
+import com.example.noteme.project.adapter.ContactListAdapter;
 import com.example.noteme.project.database.Contact;
+import com.example.noteme.project.database.DataHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,8 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
     private DataHandler dataHandler;
     public List<Contact> myContacts = new ArrayList<Contact>();
-    private MyAdapter adapter;
+    private ContactListAdapter adapter;
+    private ListView myListView;
 
 
     @Override
@@ -35,8 +35,8 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
         myContacts = dataHandler.getContacts();
 
-        ListView myListView = (ListView) findViewById(R.id.lv_contact_list);
-        adapter = new MyAdapter(this, myContacts);
+        myListView = (ListView) findViewById(R.id.lv_contact_list);
+        adapter = new ContactListAdapter(this, myContacts);
 
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
@@ -48,13 +48,13 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ContactListActivity.this);
                 builder.setMessage("Точно хотите удалить")
-                        .setPositiveButton("No", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
                             }
                         })
-                        .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Contact contact = (Contact) adapter.getItem(position);
@@ -73,7 +73,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     @Override
     protected void onResume() {
         super.onResume();
-        adapter.notifyDataSetChanged();
+        adapter.setContacts(dataHandler.getContacts());
     }
 
     protected void onDestroy() {

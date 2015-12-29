@@ -47,27 +47,6 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
         initContact();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.frame_photo_pick:
-                FragmentManager fm = getSupportFragmentManager();
-                PickPhotoDialog alertDialog = PickPhotoDialog.newInstance("Some title");
-                alertDialog.show(fm, "fragment_alert");
-
-                break;
-            case R.id.btn_contact_save:
-                String name = etName.getText().toString();
-                String mail = etEmail.getText().toString();
-                String number = etPhone.getText().toString();
-                String description = etDescription.getText().toString();
-
-                Contact contact = new Contact(null, filePath, name, mail, number, description);
-                dataHandler.saveContact(contact);
-                break;
-        }
-    }
-
     private void initializeDataBase() {
         dataHandler = new DataHandler(this);
         dataHandler.open();
@@ -102,6 +81,28 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
             Bitmap imageBitmap = BitmapFactory.decodeFile(filePath);
             ivPhotoPick.setImageBitmap(imageBitmap);
             saveBitmap(imageBitmap);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.frame_photo_pick:
+                FragmentManager fm = getSupportFragmentManager();
+                PickPhotoDialog alertDialog = PickPhotoDialog.newInstance("Some title");
+                alertDialog.show(fm, "fragment_alert");
+
+                break;
+            case R.id.btn_contact_save:
+                String name = etName.getText().toString();
+                String mail = etEmail.getText().toString();
+                String number = etPhone.getText().toString();
+                String description = etDescription.getText().toString();
+
+                Contact contact = new Contact(null, filePath, name, mail, number, description);
+                dataHandler.saveContact(contact);
+                finish();
+                break;
         }
     }
 

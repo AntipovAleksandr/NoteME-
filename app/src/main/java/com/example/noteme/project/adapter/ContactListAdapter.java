@@ -14,12 +14,12 @@ import com.example.noteme.project.database.Contact;
 import java.util.List;
 
 
-public class MyAdapter extends BaseAdapter {
+public class ContactListAdapter extends BaseAdapter {
     private Context context;
     private List<Contact> contacts ;
     private LayoutInflater inflater;
 
-    public MyAdapter(Context context, List<Contact> contacts) {
+    public ContactListAdapter(Context context, List<Contact> contacts) {
         this.contacts = contacts;
         this.context = context;
     }
