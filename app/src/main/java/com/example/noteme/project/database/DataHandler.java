@@ -84,7 +84,7 @@ public class DataHandler {
     }
 
 
-    public ArrayList<Contact> getMainFist() {
+    public ArrayList<Contact> getContacts() {
         Cursor cursor = sqLiteDatabase.query(CONTACTS_TABLE_NAME, null, null, null, null, null, null);
         ArrayList<Contact> myContact = new ArrayList<>();
         while (cursor.moveToNext()) {

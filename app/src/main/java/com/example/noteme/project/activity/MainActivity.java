@@ -20,7 +20,7 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     private DataHandler dataHandler;
-    public List<Contact> myContact = new ArrayList<Contact>();
+    public List<Contact> myContacts = new ArrayList<Contact>();
     private MyAdapter adapter;
 
 
@@ -32,10 +32,10 @@ public class MainActivity extends Activity {
         dataHandler = new DataHandler(this);
         dataHandler.open();
 
+        myContacts = dataHandler.getContacts();
 
-        ListView myListView = (ListView) findViewById(R.id.listView);
-
-        adapter = new MyAdapter(this, myContact);
+        ListView myListView = (ListView) findViewById(R.id.lv_contact_list);
+        adapter = new MyAdapter(this, myContacts);
 
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(adapterListener);
@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
                             public void onClick(DialogInterface dialog, int which) {
                                 Contact contact = (Contact) adapter.getItem(position);
                                 dataHandler.removeContact(contact.getContactID());
-                                adapter.setContacts(dataHandler.getMainFist());
+                                adapter.setContacts(dataHandler.getContacts());
                             }
                         })
                         .setCancelable(false);

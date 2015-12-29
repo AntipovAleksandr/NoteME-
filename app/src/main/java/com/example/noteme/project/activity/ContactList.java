@@ -11,14 +11,13 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.noteme.R;
 import com.example.noteme.project.adapter.PickPhotoDialog;
-import com.example.noteme.project.database.DataHandler;
 import com.example.noteme.project.database.Contact;
+import com.example.noteme.project.database.DataHandler;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -26,15 +25,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class ContactList extends AppCompatActivity {
+public class ContactList extends AppCompatActivity implements View.OnClickListener {
 
     public static final int REQUEST_IMAGE_CAPTURE = 0;
     public static final int REQUEST_GALLERY = 1;
 
-    EditText editText, editText1, editText2, editText3;
-    TextInputLayout til, til1, til2, til3;
-    Button btrSave;
-    ImageView photoPick;
+    private EditText etEmail, etName, etPhone, etDescription;
+    private ImageView ivPhotoPick;
 
     private DataHandler dataHandler;
     private String filePath = null;
@@ -45,54 +42,51 @@ public class ContactList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
-        btrSave = (Button) findViewById(R.id.btn_contact_save);
+        initializeDataBase();
+        initializeViews();
+        initContact();
+    }
 
-        til = (TextInputLayout) findViewById(R.id.til_email);
-        til1 = (TextInputLayout) findViewById(R.id.til_name);
-        til2 = (TextInputLayout) findViewById(R.id.til_phone);
-        til3 = (TextInputLayout) findViewById(R.id.til_description);
-
-        editText = (EditText) til.findViewById(R.id.et_email_field);
-        editText1 = (EditText) til1.findViewById(R.id.et_name_field);
-        editText2 = (EditText) til2.findViewById(R.id.et_phone_field);
-        editText3 = (EditText) til3.findViewById(R.id.et_description_field);
-
-        til.setHint(getString(R.string.hint));
-        til1.setHint(getString(R.string.hint1));
-        til2.setHint(getString(R.string.hint2));
-        til3.setHint(getString(R.string.hint3));
-
-        dataHandler = new DataHandler(this);
-        dataHandler.open();
-
-
-        btrSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = editText1.getText().toString();
-                String mail = editText.getText().toString();
-                String number = editText2.getText().toString();
-                String description = editText3.getText().toString();
-
-                Contact contact = new Contact(null, filePath, name, mail, number, description);
-                dataHandler.saveContact(contact);
-            }
-        });
-
-
-        photoPick = (ImageView) findViewById(R.id.iv_photo_pick);
-        photoPick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.frame_photo_pick:
                 FragmentManager fm = getSupportFragmentManager();
                 PickPhotoDialog alertDialog = PickPhotoDialog.newInstance("Some title");
                 alertDialog.show(fm, "fragment_alert");
 
-            }
-        });
+                break;
+            case R.id.btn_contact_save:
+                String name = etName.getText().toString();
+                String mail = etEmail.getText().toString();
+                String number = etPhone.getText().toString();
+                String description = etDescription.getText().toString();
 
+                Contact contact = new Contact(null, filePath, name, mail, number, description);
+                dataHandler.saveContact(contact);
+                break;
+        }
+    }
 
-        initContact();
+    private void initializeDataBase() {
+        dataHandler = new DataHandler(this);
+        dataHandler.open();
+    }
+
+    private void initializeViews() {
+        ((TextInputLayout) findViewById(R.id.til_name)).setHint(getString(R.string.hint_name_txt));
+        ((TextInputLayout) findViewById(R.id.til_email)).setHint(getString(R.string.hint_email_txt));
+        ((TextInputLayout) findViewById(R.id.til_phone)).setHint(getString(R.string.hint_phone_txt));
+        ((TextInputLayout) findViewById(R.id.til_description)).setHint(getString(R.string.hint_description_txt));
+
+        ivPhotoPick = (ImageView) findViewById(R.id.iv_photo_pick);
+        etName = (EditText) findViewById(R.id.et_name_field);
+        etEmail = (EditText) findViewById(R.id.et_email_field);
+        etPhone = (EditText) findViewById(R.id.et_phone_field);
+        etDescription = (EditText) findViewById(R.id.et_description_field);
+
+        (findViewById(R.id.frame_photo_pick)).setOnClickListener(this);
+        (findViewById(R.id.btn_contact_save)).setOnClickListener(this);
     }
 
     private void initContact() {
@@ -100,16 +94,17 @@ public class ContactList extends AppCompatActivity {
         if (extras != null && extras.containsKey(CONTACT_ID)) {
             String contactId = extras.getString(CONTACT_ID);
             Contact mail = dataHandler.getMain(contactId);
-            editText.setText(mail.getEmail());
-            editText1.setText(mail.getName());
-            editText2.setText(mail.getNumber());
-            editText3.setText(mail.getDescription());
+            etEmail.setText(mail.getEmail());
+            etName.setText(mail.getName());
+            etPhone.setText(mail.getNumber());
+            etDescription.setText(mail.getDescription());
             filePath = mail.getFilePath();
             Bitmap imageBitmap = BitmapFactory.decodeFile(filePath);
-            photoPick.setImageBitmap(imageBitmap);
+            ivPhotoPick.setImageBitmap(imageBitmap);
             saveBitmap(imageBitmap);
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -133,10 +128,11 @@ public class ContactList extends AppCompatActivity {
                 imageBitmap.getHeight();
                 saveBitmap(imageBitmap);
             }
-            photoPick.setImageBitmap(imageBitmap);
+            ivPhotoPick.setImageBitmap(imageBitmap);
         }
 
     }
+
     private void saveBitmap(Bitmap imageBitmap) {
         try {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -157,11 +153,8 @@ public class ContactList extends AppCompatActivity {
         }
     }
 
-
     protected void onDestroy() {
         super.onDestroy();
         dataHandler.close();
     }
-
-
 }

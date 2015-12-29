@@ -5,11 +5,11 @@
     <string name="email">Email</string>
     <string name="number">Number</string>
     <string name="description">Description</string>
-    <string name="hint">Mail</string>
-    <string name="hint2">Number</string>
-    <string name="hint3">Description</string>
+    <string name="hint_email_txt">Mail</string>
+    <string name="hint_phone_txt">Number</string>
+    <string name="hint_description_txt">Description</string>
     <string name="btn_save">Save</string>
     <string name="add_photo_txt">add photo</string>
     <string name="name">Name</string>
-    <string name="hint1">Name</string>
+    <string name="hint_name_txt">Name</string>
 </resources>
