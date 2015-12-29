@@ -6,7 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -140,15 +142,13 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] byteArray = stream.toByteArray();
 
-            File pickDirectory = new File("/sdcard/CamPickApp");
+            File pickDirectory = new File(Environment.getExternalStorageDirectory() + "/CamPickApp");
             pickDirectory.mkdirs();
             filePath = pickDirectory + "/Pick_" + System.currentTimeMillis() + ".png";
             FileOutputStream fo = new FileOutputStream(new File(filePath));
             fo.write(byteArray);
             fo.flush();
             fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
