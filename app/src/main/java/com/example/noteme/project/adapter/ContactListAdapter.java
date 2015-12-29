@@ -1,8 +1,6 @@
 package com.example.noteme.project.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +10,13 @@ import android.widget.TextView;
 
 import com.example.noteme.R;
 import com.example.noteme.project.database.Contact;
-import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.util.List;
 
 
 public class ContactListAdapter extends BaseAdapter {
     private Context context;
-    private List<Contact> contacts ;
+    private List<Contact> contacts;
     private LayoutInflater inflater;
 
     public ContactListAdapter(Context context, List<Contact> contacts) {
@@ -49,7 +45,7 @@ public class ContactListAdapter extends BaseAdapter {
 
         View view = convertView;
 
-        if (view == null){
+        if (view == null) {
             view = inflater.inflate(R.layout.item_contact_list, viewGroup, false);
         }
 
@@ -57,21 +53,17 @@ public class ContactListAdapter extends BaseAdapter {
         contactName.setText(contacts.get(position).getName());
 
         ImageView contactAvatar = (ImageView) view.findViewById(R.id.iv_item_contact_avatar);
+        contactAvatar.setImageDrawable(context.getResources().getDrawable(R.mipmap.ic_android));
 
-        if (contacts.get(position).getFilePath() != null) {
-            Picasso.with(context).load(new File(contacts.get(position).getFilePath(), "avatar")).into(contactAvatar);
-        } else {
-            contactAvatar.setImageDrawable(context.getResources().getDrawable(R.mipmap.ic_android));
-        }
         return view;
     }
 
-    public void setContacts (List<Contact> contacts){
+    public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
         notifyDataSetChanged();
     }
 
-    public Contact getContact(int position){
+    public Contact getContact(int position) {
         return (Contact) getItem(position);
     }
 }
