@@ -25,7 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class ContactList extends AppCompatActivity implements View.OnClickListener {
+public class AddContactActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int REQUEST_IMAGE_CAPTURE = 0;
     public static final int REQUEST_GALLERY = 1;
@@ -40,7 +40,7 @@ public class ContactList extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact_list);
+        setContentView(R.layout.activity_add_contact);
 
         initializeDataBase();
         initializeViews();

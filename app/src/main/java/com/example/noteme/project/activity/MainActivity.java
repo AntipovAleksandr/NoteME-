@@ -66,10 +66,13 @@ public class MainActivity extends Activity {
                 return true;
             }
         });
-
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
 
     private AdapterView.OnItemClickListener adapterListener = new AdapterView.OnItemClickListener(){
 
@@ -77,17 +80,17 @@ public class MainActivity extends Activity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Contact contact = (Contact) adapter.getItem(position);
             Bundle bundle = new Bundle();
-            bundle.putString(ContactList.CONTACT_ID, contact.getContactID());
+            bundle.putString(AddContactActivity.CONTACT_ID, contact.getContactID());
             Intent intent = new Intent();
             intent.putExtras(bundle);
-            intent.setClass(getBaseContext(), ContactList.class);
+            intent.setClass(getBaseContext(), AddContactActivity.class);
             startActivity(intent);
         }
     };
 
 
     public void onClickAddContact(View v) {
-        Intent intent = new Intent(MainActivity.this, ContactList.class);
+        Intent intent = new Intent(MainActivity.this, AddContactActivity.class);
         startActivity(intent);
     }
 

@@ -5,12 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.noteme.R;
 import com.example.noteme.project.database.Contact;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -49,9 +49,14 @@ public class MyAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.item_view, viewGroup, false);
         }
 
+        TextView contactName = (TextView) view.findViewById(R.id.tv_item_contact_name);
+        contactName.setText(contacts.get(position).getName());
 
-        TextView textView = (TextView) view.findViewById(R.id.itemText);
-        textView.setText(contacts.get(position).getEmail());
+        ImageView contactAvatar = (ImageView) view.findViewById(R.id.iv_item_contact_avatar);
+
+        if (contacts.get(position).getFilePath() != null) {
+            contactAvatar.setImageDrawable(context.getResources().getDrawable(R.mipmap.ic_android));
+        }
         return view;
     }
 
