@@ -17,7 +17,7 @@ import com.example.noteme.project.database.Contact;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class ContactListActivity extends Activity {
 
     private DataHandler dataHandler;
     public List<Contact> myContacts = new ArrayList<Contact>();
@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_contact_list);
 
         dataHandler = new DataHandler(this);
         dataHandler.open();
@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
         myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ContactListActivity.this);
                 builder.setMessage("Точно хотите удалить")
                         .setPositiveButton("No", new DialogInterface.OnClickListener() {
                             @Override
@@ -90,7 +90,7 @@ public class MainActivity extends Activity {
 
 
     public void onClickAddContact(View v) {
-        Intent intent = new Intent(MainActivity.this, AddContactActivity.class);
+        Intent intent = new Intent(ContactListActivity.this, AddContactActivity.class);
         startActivity(intent);
     }
 
