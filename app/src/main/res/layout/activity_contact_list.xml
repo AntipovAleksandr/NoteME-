@@ -20,5 +20,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
+        android:background="?selectableItemBackground"
         android:src="@drawable/add204"/>
 </RelativeLayout>
