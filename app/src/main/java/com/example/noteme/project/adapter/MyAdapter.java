@@ -46,7 +46,7 @@ public class MyAdapter extends BaseAdapter {
         View view = convertView;
 
         if (view == null){
-            view = inflater.inflate(R.layout.item_view, viewGroup, false);
+            view = inflater.inflate(R.layout.item_contact_list, viewGroup, false);
         }
 
         TextView contactName = (TextView) view.findViewById(R.id.tv_item_contact_name);
@@ -68,8 +68,4 @@ public class MyAdapter extends BaseAdapter {
     public Contact getContact(int position){
         return (Contact) getItem(position);
     }
-
-
-
-
 }

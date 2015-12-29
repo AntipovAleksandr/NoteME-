@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.noteme.R;
@@ -17,7 +18,7 @@ import com.example.noteme.project.database.Contact;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactListActivity extends Activity {
+public class ContactListActivity extends Activity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     private DataHandler dataHandler;
     public List<Contact> myContacts = new ArrayList<Contact>();
@@ -38,8 +39,9 @@ public class ContactListActivity extends Activity {
         adapter = new MyAdapter(this, myContacts);
 
         myListView.setAdapter(adapter);
-        myListView.setOnItemClickListener(adapterListener);
+        myListView.setOnItemClickListener(this);
 
+        (findViewById(R.id.btn_contact_list_add)).setOnClickListener(this);
 
         myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -74,30 +76,19 @@ public class ContactListActivity extends Activity {
         adapter.notifyDataSetChanged();
     }
 
-    private AdapterView.OnItemClickListener adapterListener = new AdapterView.OnItemClickListener(){
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Contact contact = (Contact) adapter.getItem(position);
-            Bundle bundle = new Bundle();
-            bundle.putString(AddContactActivity.CONTACT_ID, contact.getContactID());
-            Intent intent = new Intent();
-            intent.putExtras(bundle);
-            intent.setClass(getBaseContext(), AddContactActivity.class);
-            startActivity(intent);
-        }
-    };
-
-
-    public void onClickAddContact(View v) {
-        Intent intent = new Intent(ContactListActivity.this, AddContactActivity.class);
-        startActivity(intent);
-    }
-
-
     protected void onDestroy() {
         super.onDestroy();
         dataHandler.close();
     }
 
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(ContactListActivity.this, AddContactActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
 }
