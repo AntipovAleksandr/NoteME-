@@ -18,7 +18,7 @@
             android:layout_width="157dp"
             android:layout_height="156dp"
             android:layout_gravity="center_horizontal"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/ic_photo_camera_black_24dp" />
 
         <TextView
             android:id="@+id/tv_photo_pick"
@@ -28,6 +28,7 @@
             android:layout_marginBottom="20dp"
             android:text="@string/add_photo_txt"
             android:textSize="15sp"
+            android:textColor="@android:color/white"
             android:textStyle="bold" />
     </FrameLayout>
 
