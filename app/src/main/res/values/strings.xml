@@ -9,7 +9,7 @@
     <string name="hint2">Number</string>
     <string name="hint3">Description</string>
     <string name="btn_save">Save</string>
-    <string name="add_photo">add_photo</string>
+    <string name="add_photo_txt">add photo</string>
     <string name="name">Name</string>
     <string name="hint1">Name</string>
 </resources>

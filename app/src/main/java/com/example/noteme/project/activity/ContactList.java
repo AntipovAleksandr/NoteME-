@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.noteme.R;
 import com.example.noteme.project.adapter.PickPhotoDialog;
@@ -38,7 +37,7 @@ public class ContactList extends AppCompatActivity {
     ImageView photoPick;
 
     private DataHandler dataHandler;
-    private String filePath;
+    private String filePath = null;
     public static String CONTACT_ID;
 
     @Override
@@ -46,17 +45,17 @@ public class ContactList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
-        btrSave = (Button) findViewById(R.id.btnSave);
+        btrSave = (Button) findViewById(R.id.btn_contact_save);
 
-        til = (TextInputLayout) findViewById(R.id.textInputLayout);
-        til1 = (TextInputLayout) findViewById(R.id.textInputLayout1);
-        til2 = (TextInputLayout) findViewById(R.id.textInputLayout2);
-        til3 = (TextInputLayout) findViewById(R.id.textInputLayout3);
+        til = (TextInputLayout) findViewById(R.id.til_email);
+        til1 = (TextInputLayout) findViewById(R.id.til_name);
+        til2 = (TextInputLayout) findViewById(R.id.til_phone);
+        til3 = (TextInputLayout) findViewById(R.id.til_description);
 
-        editText = (EditText) til.findViewById(R.id.editText);
-        editText1 = (EditText) til1.findViewById(R.id.editText1);
-        editText2 = (EditText) til2.findViewById(R.id.editText2);
-        editText3 = (EditText) til3.findViewById(R.id.editText3);
+        editText = (EditText) til.findViewById(R.id.et_email_field);
+        editText1 = (EditText) til1.findViewById(R.id.et_name_field);
+        editText2 = (EditText) til2.findViewById(R.id.et_phone_field);
+        editText3 = (EditText) til3.findViewById(R.id.et_description_field);
 
         til.setHint(getString(R.string.hint));
         til1.setHint(getString(R.string.hint1));
@@ -81,7 +80,7 @@ public class ContactList extends AppCompatActivity {
         });
 
 
-        photoPick = (ImageView) findViewById(R.id.photoPick);
+        photoPick = (ImageView) findViewById(R.id.iv_photo_pick);
         photoPick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
