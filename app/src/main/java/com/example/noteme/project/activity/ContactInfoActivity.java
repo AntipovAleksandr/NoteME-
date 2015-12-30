@@ -1,20 +1,39 @@
 package com.example.noteme.project.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.example.noteme.R;
+import com.example.noteme.project.database.Contact;
+import com.example.noteme.project.database.DataHandler;
 
-/**
- * Created by vladimiryerokhin on 12/30/15.
- */
+
 public class ContactInfoActivity extends AppCompatActivity {
 
+    private long contacsId;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_info);
+
+        Bundle bundle =  getIntent().getExtras();
+        contacsId = bundle.getLong("ContacsId");
+        DataHandler dataHandler = new DataHandler(this);
+        Contact contact = dataHandler.getMain(String.valueOf(contacsId));
+
+
+        TextView userName = (TextView) findViewById(R.id.tv_userinfo_user_Name);
+        TextView userEmail = (TextView) findViewById(R.id.tv_userinfo_user_Email);
+        TextView userNumber = (TextView) findViewById(R.id.tv_userinfo_user_Number);
+        TextView userDescription = (TextView) findViewById(R.id.tv_userinfo_user_Description);
+
+
+        userName.setText(contact.getName());
+        userEmail.setText(contact.getEmail());
+        userNumber.setText(contact.getNumber());
+        userDescription.setText(contact.getDescription());
 
 
     }

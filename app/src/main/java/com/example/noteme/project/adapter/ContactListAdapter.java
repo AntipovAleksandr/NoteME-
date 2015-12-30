@@ -38,7 +38,7 @@ public class ContactListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return Long.parseLong(contacts.get(position).getContactID());
     }
 
     @Override
