@@ -12,4 +12,11 @@
     <string name="add_photo_txt">add photo</string>
     <string name="name">Name</string>
     <string name="hint_name_txt">Name</string>
+    <string name="tv_userinfo_username_txt">User Name</string>
+    <string name="tv_user_email_txt">user@email.com</string>
+    <string name="tv_user_email_hint">Email:</string>
+    <string name="tv_user_phone_hint">Phone number:</string>
+    <string name="tv_user_phone_txt">+380000000000</string>
+    <string name="tv_user_description_hint">Description:</string>
+    <string name="tv_user_description_txt">bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</string>
 </resources>
