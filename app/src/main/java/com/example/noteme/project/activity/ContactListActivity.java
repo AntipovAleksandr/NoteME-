@@ -83,12 +83,13 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(ContactListActivity.this, AddContactActivity.class);
+        Intent intent = new Intent(this, AddContactActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        Intent intent = new Intent(this, ContactInfoActivity.class);
+        startActivity(intent);
     }
 }

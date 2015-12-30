@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_noteme"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -26,6 +26,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".project.activity.AddContactActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".project.activity.ContactInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar" />
