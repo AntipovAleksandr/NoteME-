@@ -4,5 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="mainAppBackground">#233d4d</color>
+    <color name="mainAppBackgroundGreen">#249624</color>
+    <color name="mainAppBackgroundBlue">#2492d6</color>
+    <color name="mainAppBackgroundSand">#a16300</color>
+    <color name="mainAppBackgroundWhite">#ffffff</color>
     <color name="transparent_white">#20ffffff</color>
 </resources>

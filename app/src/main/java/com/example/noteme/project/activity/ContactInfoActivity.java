@@ -24,10 +24,10 @@ public class ContactInfoActivity extends AppCompatActivity {
         Contact contact = dataHandler.getMain(String.valueOf(contacsId));
 
 
-        TextView userName = (TextView) findViewById(R.id.tv_userinfo_user_Name);
-        TextView userEmail = (TextView) findViewById(R.id.tv_userinfo_user_Email);
-        TextView userNumber = (TextView) findViewById(R.id.tv_userinfo_user_Number);
-        TextView userDescription = (TextView) findViewById(R.id.tv_userinfo_user_Description);
+        TextView userName = (TextView) findViewById(R.id.tv_userinfo_user_name);
+        TextView userEmail = (TextView) findViewById(R.id.tv_userinfo_user_email);
+        TextView userNumber = (TextView) findViewById(R.id.tv_userinfo_user_number);
+        TextView userDescription = (TextView) findViewById(R.id.tv_userinfo_user_description);
 
 
         userName.setText(contact.getName());
