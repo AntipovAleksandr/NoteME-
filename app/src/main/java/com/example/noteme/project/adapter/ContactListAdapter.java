@@ -1,8 +1,6 @@
 package com.example.noteme.project.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.noteme.R;
-import com.example.noteme.project.database.Contact;
+import com.example.noteme.project.model.Contact;
 
 import java.util.List;
 

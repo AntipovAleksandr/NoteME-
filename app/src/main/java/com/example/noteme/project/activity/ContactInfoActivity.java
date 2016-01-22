@@ -5,13 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.example.noteme.R;
-import com.example.noteme.project.database.Contact;
 import com.example.noteme.project.database.DataHandler;
+import com.example.noteme.project.model.Contact;
 
 
 public class ContactInfoActivity extends AppCompatActivity {
 
     private long contacsId;
+    private DataHandler dataHandler;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -20,9 +21,10 @@ public class ContactInfoActivity extends AppCompatActivity {
 
         Bundle bundle =  getIntent().getExtras();
         contacsId = bundle.getLong("ContacsId");
-        DataHandler dataHandler = new DataHandler(this);
-        Contact contact = dataHandler.getMain(String.valueOf(contacsId));
+        dataHandler = new DataHandler(this);
+        dataHandler.open();
 
+        Contact contact = dataHandler.getContact(String.valueOf(contacsId));
 
         TextView userName = (TextView) findViewById(R.id.tv_userinfo_user_name);
         TextView userEmail = (TextView) findViewById(R.id.tv_userinfo_user_email);
@@ -34,7 +36,11 @@ public class ContactInfoActivity extends AppCompatActivity {
         userEmail.setText(contact.getEmail());
         userNumber.setText(contact.getNumber());
         userDescription.setText(contact.getDescription());
+    }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dataHandler.close();
     }
 }

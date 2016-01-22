@@ -13,8 +13,8 @@ import android.widget.ListView;
 
 import com.example.noteme.R;
 import com.example.noteme.project.adapter.ContactListAdapter;
-import com.example.noteme.project.database.Contact;
 import com.example.noteme.project.database.DataHandler;
+import com.example.noteme.project.model.Contact;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +93,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, ContactInfoActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putLong("ContacsId",parent.getItemIdAtPosition(position));
+        bundle.putLong("ContacsId", parent.getItemIdAtPosition(position));
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -108,7 +108,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 
             case R.id.action_settings:
                 Intent intent = new Intent(this, SettingActivity.class);

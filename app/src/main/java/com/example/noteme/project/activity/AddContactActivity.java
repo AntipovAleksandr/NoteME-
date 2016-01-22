@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,13 +16,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.noteme.R;
-import com.example.noteme.project.adapter.PickPhotoDialog;
-import com.example.noteme.project.database.Contact;
 import com.example.noteme.project.database.DataHandler;
+import com.example.noteme.project.dialog.PickPhotoDialog;
+import com.example.noteme.project.model.Contact;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -74,7 +72,7 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey(CONTACT_ID)) {
             String contactId = extras.getString(CONTACT_ID);
-            Contact mail = dataHandler.getMain(contactId);
+            Contact mail = dataHandler.getContact(contactId);
             etEmail.setText(mail.getEmail());
             etName.setText(mail.getName());
             etPhone.setText(mail.getNumber());

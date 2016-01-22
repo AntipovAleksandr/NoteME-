@@ -1,4 +1,4 @@
-package com.example.noteme.project.database;
+package com.example.noteme.project.model;
 
 public class Contact {
 

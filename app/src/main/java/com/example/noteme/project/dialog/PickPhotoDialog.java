@@ -1,4 +1,4 @@
-package com.example.noteme.project.adapter;
+package com.example.noteme.project.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

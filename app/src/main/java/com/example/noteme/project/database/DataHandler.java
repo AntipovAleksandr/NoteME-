@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.noteme.project.model.Contact;
+
 import java.util.ArrayList;
 
 public class DataHandler {
@@ -13,7 +15,7 @@ public class DataHandler {
     SQLiteDatabase sqLiteDatabase;
 
     public static final String CONTACTS_TABLE_NAME = "contactTable";
-    public static final String DATA_BASE_NAME = "myDataBase";
+    public static final String DATA_BASE_NAME = "noteMeDB";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_CREATE = "CREATE TABLE contactTable(contactID TEXT, filePath TEXT, name TEXT, mail TEXT, number TEXT, description TEXT);";
     public static final String FROM_COLUMN_ID = "contactID = ?";
@@ -75,11 +77,12 @@ public class DataHandler {
         sqLiteDatabase.delete("contactTable", whereClause, whereArgs);
     }
 
-    public Contact getMain(String contactId) {
+    public Contact getContact(String contactID) {
         String whereClause = FROM_COLUMN_ID;
-        String[] whereArgs = new String[]{contactId};
+        String[] whereArgs = new String[]{contactID};
         Cursor c = sqLiteDatabase.query(CONTACTS_TABLE_NAME, null, whereClause, whereArgs, null, null, null);
         c.moveToFirst();
+
         return getContact(c);
     }
 
@@ -91,6 +94,7 @@ public class DataHandler {
             myContact.add(getContact(cursor));
         }
         cursor.close();
+
         return myContact;
     }
 
@@ -101,8 +105,8 @@ public class DataHandler {
         String mail = cursor.getString((cursor.getColumnIndex("mail")));
         String number = cursor.getString((cursor.getColumnIndex("number")));
         String description = cursor.getString((cursor.getColumnIndex("description")));
-        Contact contact = new Contact(contactID, filePath, name, mail, number, description);
-        return contact;
+
+        return new Contact(contactID, filePath, name, mail, number, description);
     }
 
 }
