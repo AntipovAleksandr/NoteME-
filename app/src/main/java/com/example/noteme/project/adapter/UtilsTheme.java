@@ -5,9 +5,7 @@ import android.content.Intent;
 
 import com.example.noteme.R;
 
-/**
- * Created by Alex on 11.01.2016.
- */
+
 public class UtilsTheme {
 
     private static int sTheme;

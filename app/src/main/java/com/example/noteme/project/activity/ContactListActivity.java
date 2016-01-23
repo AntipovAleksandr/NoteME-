@@ -118,4 +118,30 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+         openQuitDialog();
+    }
+
+    private void openQuitDialog() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
+        quitDialog.setTitle(R.string.NoteMe);
+        quitDialog.setMessage(R.string.Title_back_press);
+        quitDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        quitDialog.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        quitDialog.show();
+    }
 }

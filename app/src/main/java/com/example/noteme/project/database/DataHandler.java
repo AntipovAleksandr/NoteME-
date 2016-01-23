@@ -74,7 +74,7 @@ public class DataHandler {
     public void removeContact(String contactId) {
         String whereClause = FROM_COLUMN_ID;
         String[] whereArgs = new String[]{contactId};
-        sqLiteDatabase.delete("contactTable", whereClause, whereArgs);
+        sqLiteDatabase.delete(CONTACTS_TABLE_NAME, whereClause, whereArgs);
     }
 
     public Contact getContact(String contactID) {

@@ -72,12 +72,12 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey(CONTACT_ID)) {
             String contactId = extras.getString(CONTACT_ID);
-            Contact mail = dataHandler.getContact(contactId);
-            etEmail.setText(mail.getEmail());
-            etName.setText(mail.getName());
-            etPhone.setText(mail.getNumber());
-            etDescription.setText(mail.getDescription());
-            filePath = mail.getFilePath();
+            Contact contact = dataHandler.getContact(contactId);
+            filePath = contact.getFilePath();
+            etName.setText(contact.getName());
+            etEmail.setText(contact.getEmail());
+            etPhone.setText(contact.getNumber());
+            etDescription.setText(contact.getDescription());
             Bitmap imageBitmap = BitmapFactory.decodeFile(filePath);
             ivPhotoPick.setImageBitmap(imageBitmap);
             saveBitmap(imageBitmap);
