@@ -114,7 +114,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, ContactInfoActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putLong("ContacsId", parent.getItemIdAtPosition(position));
+        bundle.putLong("ContactsId", parent.getItemIdAtPosition(position));
         intent.putExtras(bundle);
         startActivity(intent);
     }

@@ -11,20 +11,20 @@ import com.example.noteme.project.model.Contact;
 
 public class ContactInfoActivity extends AppCompatActivity {
 
-    private long contacsId;
+    private long contactsId;
     private DataHandler dataHandler;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_info);
 
-        Bundle bundle =  getIntent().getExtras();
-        contacsId = bundle.getLong("ContacsId");
+        Bundle bundle = getIntent().getExtras();
+        contactsId = bundle.getLong("ContactsId");
         dataHandler = new DataHandler(this);
         dataHandler.open();
 
-        Contact contact = dataHandler.getContact(String.valueOf(contacsId));
+        Contact contact = dataHandler.getContact(String.valueOf(contactsId));
 
         TextView userName = (TextView) findViewById(R.id.tv_userinfo_user_name);
         TextView userEmail = (TextView) findViewById(R.id.tv_userinfo_user_email);
