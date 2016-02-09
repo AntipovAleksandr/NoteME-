@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.noteme.R;
 import com.example.noteme.project.adapter.ContactListAdapter;
@@ -25,12 +26,16 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     public List<Contact> myContacts = new ArrayList<Contact>();
     private ContactListAdapter adapter;
     private ListView myListView;
+    private TextView textToOneContact;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
+
+
 
         dataHandler = new DataHandler(this);
         dataHandler.open();
@@ -42,6 +47,14 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
+
+        textToOneContact = (TextView) findViewById(R.id.text_to_one_contact);
+
+        if (myContacts != null & myContacts.size() > 0) {
+            textToOneContact.setVisibility(View.GONE);
+        } else {
+            textToOneContact.setVisibility(View.VISIBLE);
+        }
 
         (findViewById(R.id.btn_contact_list_add)).setOnClickListener(this);
 
@@ -70,12 +83,20 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                 return true;
             }
         });
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         adapter.setContacts(dataHandler.getContacts());
+
+        if (myContacts != null & myContacts.size() > 0) {
+            textToOneContact.setVisibility(View.GONE);
+        } else {
+            textToOneContact.setVisibility(View.VISIBLE);
+        }
+
     }
 
     protected void onDestroy() {
@@ -121,12 +142,13 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
     @Override
     public void onBackPressed() {
-         openQuitDialog();
+        openQuitDialog();
     }
 
     private void openQuitDialog() {
         AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
         quitDialog.setTitle(R.string.NoteMe);
+        quitDialog.setIcon(R.mipmap.ic_noteme);
         quitDialog.setMessage(R.string.Title_back_press);
         quitDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override

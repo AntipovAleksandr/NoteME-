@@ -5,10 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.view.View;
+import android.widget.TextView;
 
+import com.example.noteme.R;
 import com.example.noteme.project.model.Contact;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataHandler {
 
@@ -26,7 +30,6 @@ public class DataHandler {
     public DataHandler(Context context) {
 
         dbHelper = new DataBaseHelper(context.getApplicationContext());
-
     }
 
     private static class DataBaseHelper extends SQLiteOpenHelper {

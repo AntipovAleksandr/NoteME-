@@ -19,6 +19,7 @@ public class ContactListAdapter extends BaseAdapter {
     private List<Contact> contacts;
     private LayoutInflater inflater;
 
+
     public ContactListAdapter(Context context, List<Contact> contacts) {
         this.contacts = contacts;
         this.context = context;
@@ -51,6 +52,8 @@ public class ContactListAdapter extends BaseAdapter {
 
         TextView contactName = (TextView) view.findViewById(R.id.tv_item_contact_name);
         contactName.setText(contacts.get(position).getName());
+
+
 
         ImageView contactAvatar = (ImageView) view.findViewById(R.id.iv_item_contact_avatar);
         contactAvatar.setImageDrawable(context.getResources().getDrawable(R.mipmap.ic_launcher));

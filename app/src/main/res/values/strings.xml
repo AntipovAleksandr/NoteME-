@@ -24,4 +24,5 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="NoteMe">NoteMe</string>
+    <string name="text_to_one_contact">Здесь пока отсутствут запись, добавить новую запись нажмите на плюс в правом нижнем углу экрана.</string>
 </resources>
