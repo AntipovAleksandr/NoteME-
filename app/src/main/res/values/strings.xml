@@ -20,9 +20,9 @@
     <string name="tv_user_description_hint">Description:</string>
     <string name="tv_user_description_txt">bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</string>
     <string name="Choose_theme_color">Choose theme color</string>
-    <string name="Title_back_press">Выход: Вы уверены?</string>
+    <string name="title_back_press">Вы уверены, что хотите выйти?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="NoteMe">NoteMe</string>
-    <string name="text_to_one_contact">Здесь пока отсутствут запись, добавить новую запись нажмите на плюс в правом нижнем углу экрана.</string>
+    <string name="text_to_one_contact">У вас пока нет контактов.</string>
 </resources>

@@ -20,14 +20,13 @@ import com.example.noteme.project.model.Contact;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactListActivity extends Activity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class ContactListActivity extends Activity implements AdapterView.OnItemClickListener,
+        View.OnClickListener, AdapterView.OnItemLongClickListener {
 
     private DataHandler dataHandler;
     public List<Contact> myContacts = new ArrayList<Contact>();
     private ContactListAdapter adapter;
-    private ListView myListView;
     private TextView textToOneContact;
-
 
 
     @Override
@@ -35,68 +34,38 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
-
-
         dataHandler = new DataHandler(this);
         dataHandler.open();
 
-        myContacts = dataHandler.getContacts();
-
-        myListView = (ListView) findViewById(R.id.lv_contact_list);
-        adapter = new ContactListAdapter(this, myContacts);
+        (findViewById(R.id.btn_contact_list_add)).setOnClickListener(this);
+        ListView myListView = (ListView) findViewById(R.id.lv_contact_list);
+        adapter = new ContactListAdapter(this);
 
         myListView.setAdapter(adapter);
+
         myListView.setOnItemClickListener(this);
+        myListView.setOnItemLongClickListener(this);
 
         textToOneContact = (TextView) findViewById(R.id.text_to_one_contact);
-
-        if (myContacts != null & myContacts.size() > 0) {
-            textToOneContact.setVisibility(View.GONE);
-        } else {
-            textToOneContact.setVisibility(View.VISIBLE);
-        }
-
-        (findViewById(R.id.btn_contact_list_add)).setOnClickListener(this);
-
-        myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ContactListActivity.this);
-                builder.setMessage("Точно хотите удалить")
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        })
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Contact contact = (Contact) adapter.getItem(position);
-                                dataHandler.removeContact(contact.getContactID());
-                                adapter.setContacts(dataHandler.getContacts());
-                            }
-                        })
-                        .setCancelable(false);
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-                return true;
-            }
-        });
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        adapter.setContacts(dataHandler.getContacts());
-
-        if (myContacts != null & myContacts.size() > 0) {
-            textToOneContact.setVisibility(View.GONE);
-        } else {
-            textToOneContact.setVisibility(View.VISIBLE);
+        if (isContactsAvailable()) {
+            adapter.setContacts(myContacts);
         }
+    }
 
+    private boolean isContactsAvailable() {
+        myContacts = dataHandler.getContacts();
+        if (myContacts.isEmpty()) {
+            textToOneContact.setVisibility(View.VISIBLE);
+            return false;
+        } else {
+            textToOneContact.setVisibility(View.GONE);
+            return true;
+        }
     }
 
     protected void onDestroy() {
@@ -120,8 +89,34 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(ContactListActivity.this);
+        builder.setMessage("Точно хотите удалить этот контакт?")
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Contact contact = (Contact) adapter.getItem(position);
+                        dataHandler.removeContact(contact.getContactID());
+                        adapter.setContacts(dataHandler.getContacts());
+                        isContactsAvailable();
+                    }
+                })
+                .setCancelable(false);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -130,13 +125,11 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-
             case R.id.action_settings:
                 Intent intent = new Intent(this, SettingActivity.class);
                 startActivity(intent);
                 break;
         }
-
         return true;
     }
 
@@ -149,7 +142,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
         quitDialog.setTitle(R.string.NoteMe);
         quitDialog.setIcon(R.mipmap.ic_noteme);
-        quitDialog.setMessage(R.string.Title_back_press);
+        quitDialog.setMessage(R.string.title_back_press);
         quitDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -160,7 +153,6 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         quitDialog.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
             }
         });
 

@@ -1,6 +1,8 @@
 package com.example.noteme.project.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +13,15 @@ import android.widget.TextView;
 import com.example.noteme.R;
 import com.example.noteme.project.model.Contact;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class ContactListAdapter extends BaseAdapter {
     private Context context;
-    private List<Contact> contacts;
-    private LayoutInflater inflater;
+    private List<Contact> contacts = new ArrayList<>();
 
-
-    public ContactListAdapter(Context context, List<Contact> contacts) {
-        this.contacts = contacts;
+    public ContactListAdapter(Context context) {
         this.context = context;
     }
 
@@ -42,7 +42,7 @@ public class ContactListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = convertView;
 
@@ -53,15 +53,13 @@ public class ContactListAdapter extends BaseAdapter {
         TextView contactName = (TextView) view.findViewById(R.id.tv_item_contact_name);
         contactName.setText(contacts.get(position).getName());
 
-
-
         ImageView contactAvatar = (ImageView) view.findViewById(R.id.iv_item_contact_avatar);
         contactAvatar.setImageDrawable(context.getResources().getDrawable(R.mipmap.ic_launcher));
 
-//        if (contacts.get(position).getFilePath() != null) {
-//            Bitmap bitmap = BitmapFactory.decodeFile(contacts.get(position).getFilePath());
-//            contactAvatar.setImageBitmap(bitmap);
-//        }
+        if (contacts.get(position).getFilePath() != null) {
+            Bitmap bitmap = BitmapFactory.decodeFile(contacts.get(position).getFilePath());
+            contactAvatar.setImageBitmap(bitmap);
+        }
 
         return view;
     }

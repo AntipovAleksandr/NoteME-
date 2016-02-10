@@ -99,8 +99,6 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
                 String number = etPhone.getText().toString();
                 String description = etDescription.getText().toString();
 
-
-
                 Contact contact = new Contact(null, filePath, name, mail, number, description);
                 dataHandler.saveContact(contact);
                 finish();
