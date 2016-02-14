@@ -14,9 +14,11 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/btn_bucket"
                 android:layout_width="54dp"
                 android:layout_height="54dp"
-                android:padding="12dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="16dp"
                 android:background="?selectableItemBackground"
                 android:src="@drawable/bucket"
                 android:clickable="true"/>
@@ -28,14 +30,14 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginRight="16dp"
-                android:layout_toLeftOf="@+id/imageView2"
-                android:layout_toStartOf="@+id/imageView2"
+                android:layout_toLeftOf="@+id/contact_avatar"
+                android:layout_toStartOf="@+id/contact_avatar"
                 android:text="@string/tv_userinfo_username_txt"
                 android:textColor="@android:color/white"
                 android:textSize="24sp" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/contact_avatar"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
                 android:padding="8dp"
@@ -119,7 +121,14 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/tv_user_description_txt"
                     android:textColor="@android:color/white" />
+
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/insta_photo"
+                android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
 

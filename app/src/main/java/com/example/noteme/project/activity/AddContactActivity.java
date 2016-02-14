@@ -69,19 +69,7 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void initContact() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null && extras.containsKey(CONTACT_ID)) {
-            String contactId = extras.getString(CONTACT_ID);
-            Contact contact = dataHandler.getContact(contactId);
-            filePath = contact.getFilePath();
-            etName.setText(contact.getName());
-            etEmail.setText(contact.getEmail());
-            etPhone.setText(contact.getNumber());
-            etDescription.setText(contact.getDescription());
-            Bitmap imageBitmap = BitmapFactory.decodeFile(filePath);
-            ivPhotoPick.setImageBitmap(imageBitmap);
-            saveBitmap(imageBitmap);
-        }
+
     }
 
     @Override
@@ -140,7 +128,7 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] byteArray = stream.toByteArray();
 
-            File pickDirectory = new File(Environment.getExternalStorageDirectory() + "/CamPickApp");
+            File pickDirectory = new File(Environment.getExternalStorageDirectory() + "/NoteMe");
             pickDirectory.mkdirs();
             filePath = pickDirectory + "/Pick_" + System.currentTimeMillis() + ".png";
             FileOutputStream fo = new FileOutputStream(new File(filePath));
