@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.example.noteme.R;
 import com.example.noteme.project.database.DataHandler;
-import com.example.noteme.project.listeners.OnContactListListener;
 import com.example.noteme.project.model.Contact;
 import com.squareup.picasso.Picasso;
 
@@ -48,11 +47,6 @@ public class ContactInfoActivity extends AppCompatActivity implements View.OnCli
         userNumber.setText(contact.getNumber());
         userDescription.setText(contact.getDescription());
         (findViewById(R.id.btn_bucket)).setOnClickListener(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
     @Override
