@@ -15,13 +15,14 @@ import android.widget.TextView;
 import com.example.noteme.R;
 import com.example.noteme.project.adapter.ContactListAdapter;
 import com.example.noteme.project.database.DataHandler;
+import com.example.noteme.project.listeners.OnContactListListener;
 import com.example.noteme.project.model.Contact;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ContactListActivity extends Activity implements AdapterView.OnItemClickListener,
-        View.OnClickListener, AdapterView.OnItemLongClickListener {
+        View.OnClickListener, AdapterView.OnItemLongClickListener, OnContactListListener {
 
     private DataHandler dataHandler;
     public List<Contact> myContacts = new ArrayList<Contact>();
@@ -34,7 +35,8 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
-        dataHandler = new DataHandler(this);
+        dataHandler = DataHandler.getInstance(this);
+        dataHandler.getInstance(this).setListener(this);
         dataHandler.open();
 
         (findViewById(R.id.btn_contact_list_add)).setOnClickListener(this);
@@ -42,35 +44,24 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         adapter = new ContactListAdapter(this);
 
         myListView.setAdapter(adapter);
-
         myListView.setOnItemClickListener(this);
         myListView.setOnItemLongClickListener(this);
 
         textToOneContact = (TextView) findViewById(R.id.text_to_one_contact);
+
+        hideContactsIndicator();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (isContactsAvailable()) {
-            adapter.setContacts(myContacts);
-        }
+        adapter.setContacts(myContacts);
     }
 
-    private boolean isContactsAvailable() {
-        myContacts = dataHandler.getContacts();
-        if (myContacts.isEmpty()) {
-            textToOneContact.setVisibility(View.VISIBLE);
-            return false;
-        } else {
-            textToOneContact.setVisibility(View.GONE);
-            return true;
-        }
-    }
 
     protected void onDestroy() {
         super.onDestroy();
-        dataHandler.close();
+        dataHandler.getInstance(this).close();
     }
 
     @Override
@@ -102,10 +93,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Contact contact = (Contact) adapter.getItem(position);
-                        dataHandler.removeContact(contact.getContactID());
-                        adapter.setContacts(dataHandler.getContacts());
-                        isContactsAvailable();
+                        dataHandler.removeContact(((Contact) adapter.getItem(position)).getContactID());
                     }
                 })
                 .setCancelable(false);
@@ -157,5 +145,20 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         });
 
         quitDialog.show();
+    }
+
+    @Override
+    public void onContactListChanged() {
+        myContacts = DataHandler.getInstance(this).getContacts();
+        adapter.setContacts(myContacts);
+        hideContactsIndicator();
+    }
+
+    private void hideContactsIndicator() {
+        if (myContacts.isEmpty()) {
+            textToOneContact.setVisibility(View.VISIBLE);
+        } else {
+            textToOneContact.setVisibility(View.GONE);
+        }
     }
 }
