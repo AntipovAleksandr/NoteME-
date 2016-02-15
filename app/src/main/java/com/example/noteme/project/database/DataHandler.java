@@ -5,14 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.view.View;
-import android.widget.TextView;
 
-import com.example.noteme.R;
+import com.example.noteme.project.listeners.OnContactListListener;
 import com.example.noteme.project.model.Contact;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DataHandler {
 
@@ -24,8 +21,21 @@ public class DataHandler {
     public static final String TABLE_CREATE = "CREATE TABLE contactTable(contactID TEXT, filePath TEXT, name TEXT, mail TEXT, number TEXT, description TEXT);";
     public static final String FROM_COLUMN_ID = "contactID = ?";
 
-
+    private static DataHandler instance;
     public DataBaseHelper dbHelper;
+    private OnContactListListener listener;
+
+    public void setListener(OnContactListListener listener) {
+        this.listener = listener;
+    }
+
+
+    public synchronized static DataHandler getInstance(Context context) {
+        if (instance == null) {
+            instance = new DataHandler(context);
+        }
+        return instance;
+    }
 
     public DataHandler(Context context) {
 
@@ -37,6 +47,8 @@ public class DataHandler {
         public DataBaseHelper(Context context) {
             super(context, DATA_BASE_NAME, null, DATABASE_VERSION);
         }
+
+
 
         @Override
         public void onCreate(SQLiteDatabase db) {
@@ -62,7 +74,7 @@ public class DataHandler {
 
     }
 
-    public void saveContact (Contact contact) {
+    public void saveContact(Contact contact) {
         ContentValues content = new ContentValues();
         content.put("contactID", Long.toString(System.currentTimeMillis()));
         content.put("filePath", contact.getFilePath());
@@ -71,6 +83,8 @@ public class DataHandler {
         content.put("number", contact.getNumber());
         content.put("description", contact.getDescription());
         sqLiteDatabase.insert(CONTACTS_TABLE_NAME, null, content);
+        listener.onContactListChanged();
+
 
     }
 
@@ -78,6 +92,8 @@ public class DataHandler {
         String whereClause = FROM_COLUMN_ID;
         String[] whereArgs = new String[]{contactId};
         sqLiteDatabase.delete(CONTACTS_TABLE_NAME, whereClause, whereArgs);
+        listener.onContactListChanged();
+
     }
 
     public Contact getContact(String contactID) {

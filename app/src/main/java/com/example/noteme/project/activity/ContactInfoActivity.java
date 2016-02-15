@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.example.noteme.R;
 import com.example.noteme.project.database.DataHandler;
+import com.example.noteme.project.listeners.OnContactListListener;
 import com.example.noteme.project.model.Contact;
 
 
@@ -21,8 +22,7 @@ public class ContactInfoActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         contactsId = bundle.getLong("ContactsId");
-        dataHandler = new DataHandler(this);
-        dataHandler.open();
+        dataHandler = DataHandler.getInstance(this);;
 
         Contact contact = dataHandler.getContact(String.valueOf(contactsId));
 
@@ -41,6 +41,5 @@ public class ContactInfoActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dataHandler.close();
     }
 }

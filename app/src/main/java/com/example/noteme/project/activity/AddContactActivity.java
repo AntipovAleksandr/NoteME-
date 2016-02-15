@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import com.example.noteme.R;
 import com.example.noteme.project.database.DataHandler;
 import com.example.noteme.project.dialog.PickPhotoDialog;
+import com.example.noteme.project.listeners.OnContactListListener;
 import com.example.noteme.project.model.Contact;
 
 import java.io.ByteArrayOutputStream;
@@ -48,8 +49,7 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void initializeDataBase() {
-        dataHandler = new DataHandler(this);
-        dataHandler.open();
+        dataHandler =DataHandler.getInstance(this);
     }
 
     private void initializeViews() {
@@ -98,6 +98,8 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
                 String mail = etEmail.getText().toString();
                 String number = etPhone.getText().toString();
                 String description = etDescription.getText().toString();
+
+
 
                 Contact contact = new Contact(null, filePath, name, mail, number, description);
                 dataHandler.saveContact(contact);
@@ -154,6 +156,6 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
 
     protected void onDestroy() {
         super.onDestroy();
-        dataHandler.close();
+
     }
 }
