@@ -1,8 +1,6 @@
 package com.example.noteme.project.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.noteme.R;
 import com.example.noteme.project.model.Contact;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +56,12 @@ public class ContactListAdapter extends BaseAdapter {
         contactAvatar.setImageDrawable(context.getResources().getDrawable(R.mipmap.ic_launcher));
 
         if (contacts.get(position).getFilePath() != null) {
-            Bitmap bitmap = BitmapFactory.decodeFile(contacts.get(position).getFilePath());
-            contactAvatar.setImageBitmap(bitmap);
+            Picasso.with(context)
+                    .load("file://" + contacts.get(position).getFilePath())
+                    .resize(500, 500)
+                    .centerCrop()
+                    .placeholder(R.drawable.ninja_avatar)
+                    .into(contactAvatar);
         }
 
         return view;
