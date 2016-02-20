@@ -44,8 +44,9 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         myListView.setOnItemClickListener(this);
         myListView.setOnItemLongClickListener(this);
 
-        textToOneContact = (TextView) findViewById(R.id.text_to_one_contact);
+        (findViewById(R.id.btn_contact_list_add)).setOnClickListener(this);
 
+        textToOneContact = (TextView) findViewById(R.id.text_to_one_contact);
         hideContactsIndicator();
     }
 
@@ -65,8 +66,12 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, AddContactActivity.class);
-        startActivity(intent);
+        switch (v.getId()) {
+            case R.id.btn_contact_list_add:
+                Intent intent = new Intent(this, AddContactActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     @Override
