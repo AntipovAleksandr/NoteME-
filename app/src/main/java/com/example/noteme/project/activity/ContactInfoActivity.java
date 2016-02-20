@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 public class ContactInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DataHandler dataHandler;
-    long contactsId;
+    private long contactsId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,8 @@ public class ContactInfoActivity extends AppCompatActivity implements View.OnCli
 
         Bundle bundle = getIntent().getExtras();
         contactsId = bundle.getLong("ContactsId");
-        dataHandler = DataHandler.getInstance(this);;
+
+        dataHandler = DataHandler.getInstance(this);
 
         Contact contact = dataHandler.getContact(String.valueOf(contactsId));
 
@@ -33,19 +34,20 @@ public class ContactInfoActivity extends AppCompatActivity implements View.OnCli
         TextView userNumber = (TextView) findViewById(R.id.tv_userinfo_user_number);
         TextView userDescription = (TextView) findViewById(R.id.tv_userinfo_user_description);
 
-        ImageView avatar = (ImageView) findViewById(R.id.contact_avatar);
+        ImageView contactAvatar = (ImageView) findViewById(R.id.contact_avatar);
 
         Picasso.with(this)
                 .load("file://" + contact.getFilePath())
                 .resize(500, 500)
                 .centerCrop()
                 .placeholder(R.drawable.ninja_avatar)
-                .into(avatar);
+                .into(contactAvatar);
 
         userName.setText(contact.getName());
         userEmail.setText(contact.getEmail());
         userNumber.setText(contact.getNumber());
         userDescription.setText(contact.getDescription());
+
         (findViewById(R.id.btn_bucket)).setOnClickListener(this);
     }
 

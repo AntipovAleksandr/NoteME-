@@ -24,8 +24,7 @@ import java.util.List;
 public class ContactListActivity extends Activity implements AdapterView.OnItemClickListener,
         View.OnClickListener, AdapterView.OnItemLongClickListener, OnContactListListener {
 
-    private DataHandler dataHandler;
-    public List<Contact> myContacts = new ArrayList<Contact>();
+    private List<Contact> myContacts = new ArrayList<Contact>();
     private ContactListAdapter adapter;
     private TextView textToOneContact;
 
@@ -35,9 +34,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
-        dataHandler = DataHandler.getInstance(this);
-        dataHandler.getInstance(this).setListener(this);
-        dataHandler.open();
+        DataHandler.getInstance(this).setListener(this);
 
         (findViewById(R.id.btn_contact_list_add)).setOnClickListener(this);
         ListView myListView = (ListView) findViewById(R.id.lv_contact_list);
@@ -55,13 +52,15 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
     @Override
     protected void onResume() {
         super.onResume();
+        myContacts = DataHandler.getInstance(this).getContacts();
+        hideContactsIndicator();
         adapter.setContacts(myContacts);
     }
 
 
     protected void onDestroy() {
         super.onDestroy();
-        dataHandler.getInstance(this).close();
+        DataHandler.getInstance(this).close();
     }
 
     @Override
@@ -93,7 +92,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dataHandler.removeContact(((Contact) adapter.getItem(position)).getContactID());
+                        DataHandler.getInstance(ContactListActivity.this).removeContact(((Contact) adapter.getItem(position)).getContactID());
                     }
                 })
                 .setCancelable(false);

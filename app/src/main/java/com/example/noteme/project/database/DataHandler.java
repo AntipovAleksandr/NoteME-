@@ -53,14 +53,12 @@ public class DataHandler {
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(TABLE_CREATE);
-
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int i, int i2) {
             db.execSQL("DROP TABLE IF EXIST " + CONTACTS_TABLE_NAME);
             onCreate(db);
-
         }
     }
 
@@ -71,7 +69,6 @@ public class DataHandler {
 
     public void close() {
         dbHelper.close();
-
     }
 
     public void saveContact(Contact contact) {
@@ -84,8 +81,6 @@ public class DataHandler {
         content.put("description", contact.getDescription());
         sqLiteDatabase.insert(CONTACTS_TABLE_NAME, null, content);
         listener.onContactListChanged();
-
-
     }
 
     public void removeContact(String contactId) {
@@ -93,7 +88,6 @@ public class DataHandler {
         String[] whereArgs = new String[]{contactId};
         sqLiteDatabase.delete(CONTACTS_TABLE_NAME, whereClause, whereArgs);
         listener.onContactListChanged();
-
     }
 
     public Contact getContact(String contactID) {
