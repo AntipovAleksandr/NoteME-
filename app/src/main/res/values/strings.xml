@@ -25,4 +25,5 @@
     <string name="no">Нет</string>
     <string name="NoteMe">NoteMe</string>
     <string name="text_to_one_contact">У вас пока нет контактов.</string>
+    <string name="text_add_name">Добавте имя контакта.</string>
 </resources>

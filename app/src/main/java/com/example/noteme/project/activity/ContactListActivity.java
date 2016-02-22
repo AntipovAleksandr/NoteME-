@@ -133,7 +133,7 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
         quitDialog.setTitle(R.string.NoteMe);
         quitDialog.setIcon(R.mipmap.ic_noteme);
-        quitDialog.setCancelable(true);
+        quitDialog.setCancelable(false);
         quitDialog.setMessage(R.string.title_back_press);
         quitDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override

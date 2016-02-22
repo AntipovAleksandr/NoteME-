@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.noteme.R;
 import com.example.noteme.project.database.DataHandler;
@@ -32,6 +34,7 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
 
     private EditText etEmail, etName, etPhone, etDescription;
     private ImageView ivPhotoPick;
+    private TextView addText;
 
     private DataHandler dataHandler;
     private String filePath = null;
@@ -76,15 +79,22 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
                 alertDialog.show(fm, "fragment_alert");
 
                 break;
-            case R.id.btn_contact_save:
-                String name = etName.getText().toString();
-                String mail = etEmail.getText().toString();
-                String number = etPhone.getText().toString();
-                String description = etDescription.getText().toString();
-                Contact contact = new Contact(null, filePath, name, mail, number, description);
-                dataHandler.saveContact(contact);
-                finish();
-                break;
+
+                case R.id.btn_contact_save:
+                    if (etName.getText().toString().isEmpty()){
+                        (findViewById(R.id.btn_contact_save)).setActivated(false);
+                        Toast.makeText(this, R.string.text_add_name, Toast.LENGTH_LONG).show();
+                    }else {
+                        String name = etName.getText().toString();
+                        String mail = etEmail.getText().toString();
+                        String number = etPhone.getText().toString();
+                        String description = etDescription.getText().toString();
+                        Contact contact = new Contact(null, filePath, name, mail, number, description);
+                        dataHandler.saveContact(contact);
+                        finish();
+                    }
+                    break;
+
         }
     }
 
@@ -113,6 +123,8 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
             }
             ivPhotoPick.setImageBitmap(imageBitmap);
         }
+        addText = (TextView) findViewById(R.id.tv_photo_pick);
+        addText.setVisibility(View.GONE);
 
     }
 
