@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import com.example.noteme.R;
 import com.example.noteme.project.database.DataHandler;
 import com.example.noteme.project.dialog.PickPhotoDialog;
-import com.example.noteme.project.listeners.OnContactListListener;
 import com.example.noteme.project.model.Contact;
 
 import java.io.ByteArrayOutputStream;
@@ -82,9 +81,6 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
                 String mail = etEmail.getText().toString();
                 String number = etPhone.getText().toString();
                 String description = etDescription.getText().toString();
-
-
-
                 Contact contact = new Contact(null, filePath, name, mail, number, description);
                 dataHandler.saveContact(contact);
                 finish();

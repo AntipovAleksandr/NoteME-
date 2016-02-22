@@ -4,28 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-    
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <ListView
-        android:id="@+id/lv_contact_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@color/transparent_white" />
-
-    <android.support.design.widget.FloatingActionButton
-       android:id="@+id/btn_contact_list_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_plus"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_gravity="end|bottom"
-        android:onClick="onClick" />
-    </android.support.design.widget.CoordinatorLayout>
 
     <TextView
         android:id="@+id/text_to_one_contact"
@@ -41,5 +19,28 @@
         android:textColor="@android:color/white"
         android:visibility="gone"
         tools:visibility="visible" />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lv_contact_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@color/transparent_white" />
+
+        <android.support.design.widget.FloatingActionButton
+       android:id="@+id/btn_contact_list_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_plus"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_gravity="end|bottom"
+        android:onClick="onClick" />
+    </android.support.design.widget.CoordinatorLayout>
+
 
 </android.support.v4.widget.DrawerLayout>
