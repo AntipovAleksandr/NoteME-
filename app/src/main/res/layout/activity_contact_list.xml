@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true">
 
     <TextView
@@ -39,7 +40,8 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_gravity="end|bottom"
-        android:onClick="onClick" />
+        android:onClick="onClick"
+            app:backgroundTint="@color/colorAccent"/>
     </android.support.design.widget.CoordinatorLayout>
 
 
