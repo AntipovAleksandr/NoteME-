@@ -21,7 +21,8 @@
                 android:paddingBottom="16dp"
                 android:background="?selectableItemBackground"
                 android:src="@drawable/bucket"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:id="@+id/btn_delete"/>
 
             <TextView
                 android:id="@+id/tv_userinfo_user_name"

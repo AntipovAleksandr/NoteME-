@@ -16,6 +16,8 @@ public class ContactInfoActivity extends AppCompatActivity implements View.OnCli
 
     private DataHandler dataHandler;
     private long contactsId;
+    private ImageView btnDelete;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -45,7 +45,6 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
 
         initializeDataBase();
         initializeViews();
-        initContact();
     }
 
     private void initializeDataBase() {
@@ -68,9 +67,6 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
         (findViewById(R.id.btn_contact_save)).setOnClickListener(this);
     }
 
-    private void initContact() {
-
-    }
 
     @Override
     public void onClick(View v) {
@@ -142,8 +138,4 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    protected void onDestroy() {
-        super.onDestroy();
-
-    }
 }
