@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +37,6 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
 
         DataHandler.getInstance(this).setListener(this);
 
-        (findViewById(R.id.btn_contact_list_add)).setOnClickListener(this);
         ListView myListView = (ListView) findViewById(R.id.lv_contact_list);
         adapter = new ContactListAdapter(this);
 
@@ -44,9 +44,12 @@ public class ContactListActivity extends Activity implements AdapterView.OnItemC
         myListView.setOnItemClickListener(this);
         myListView.setOnItemLongClickListener(this);
 
-        (findViewById(R.id.btn_contact_list_add)).setOnClickListener(this);
+        FloatingActionButton plus = (FloatingActionButton) findViewById(R.id.btn_contact_list_add);
+        plus.setOnClickListener(this);
+        plus.setBackgroundColor(getResources().getColor(R.color.secondary_color_primary));
 
         textToOneContact = (TextView) findViewById(R.id.text_to_one_contact);
+
         hideContactsIndicator();
     }
 

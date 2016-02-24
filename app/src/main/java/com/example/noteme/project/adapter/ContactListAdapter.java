@@ -61,6 +61,8 @@ public class ContactListAdapter extends BaseAdapter {
                     .centerCrop()
                     .placeholder(R.drawable.ninja_avatar)
                     .into(contactAvatar);
+        } else {
+            contactAvatar.setImageDrawable(context.getResources().getDrawable(R.drawable.ninja_avatar));
         }
         return view;
     }

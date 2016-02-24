@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import com.example.noteme.R;
 import com.example.noteme.project.database.DataHandler;
 import com.example.noteme.project.dialog.PickPhotoDialog;
-import com.example.noteme.project.listeners.OnContactListListener;
 import com.example.noteme.project.model.Contact;
 
 import java.io.ByteArrayOutputStream;
@@ -35,20 +34,21 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
     private ImageView ivPhotoPick;
 
     private DataHandler dataHandler;
-    private String filePath = null;
-    public static String CONTACT_ID;
+    private String filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
+        filePath = null;
+
         initializeDataBase();
         initializeViews();
     }
 
     private void initializeDataBase() {
-        dataHandler =DataHandler.getInstance(this);
+        dataHandler = DataHandler.getInstance(this);
     }
 
     private void initializeViews() {
@@ -67,7 +67,6 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
         (findViewById(R.id.btn_contact_save)).setOnClickListener(this);
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -82,8 +81,6 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
                 String mail = etEmail.getText().toString();
                 String number = etPhone.getText().toString();
                 String description = etDescription.getText().toString();
-
-
 
                 Contact contact = new Contact(null, filePath, name, mail, number, description);
                 dataHandler.saveContact(contact);

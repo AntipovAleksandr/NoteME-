@@ -16,7 +16,6 @@ public class ContactInfoActivity extends AppCompatActivity implements View.OnCli
 
     private DataHandler dataHandler;
     private long contactsId;
-    private ImageView btnDelete;
 
 
     @Override
@@ -26,7 +25,6 @@ public class ContactInfoActivity extends AppCompatActivity implements View.OnCli
 
         Bundle bundle = getIntent().getExtras();
         contactsId = bundle.getLong("ContactsId");
-
         dataHandler = DataHandler.getInstance(this);
 
         Contact contact = dataHandler.getContact(String.valueOf(contactsId));
@@ -35,6 +33,7 @@ public class ContactInfoActivity extends AppCompatActivity implements View.OnCli
         TextView userEmail = (TextView) findViewById(R.id.tv_userinfo_user_email);
         TextView userNumber = (TextView) findViewById(R.id.tv_userinfo_user_number);
         TextView userDescription = (TextView) findViewById(R.id.tv_userinfo_user_description);
+
 
         ImageView contactAvatar = (ImageView) findViewById(R.id.contact_avatar);
 
@@ -56,10 +55,15 @@ public class ContactInfoActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
             case R.id.btn_bucket:
                 dataHandler.removeContact(String.valueOf(contactsId));
                 finish();
                 break;
+            default:
+                break;
         }
+
     }
 }
+

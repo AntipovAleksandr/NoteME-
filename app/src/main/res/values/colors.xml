@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="mainAppBackground">#233d4d</color>
-    <color name="mainAppBackgroundGreen">#249624</color>
-    <color name="mainAppBackgroundBlue">#2492d6</color>
-    <color name="mainAppBackgroundSand">#a16300</color>
-    <color name="mainAppBackgroundWhite">#ffffff</color>
-    <color name="transparent_white">#20ffffff</color>
+    <color name="colorPrimary">#797633</color>
+    <color name="colorPrimaryDark">#413F08</color>
+    <color name="colorAccent">#622948</color>
+
+    <!--
+    Подборка цветов по дизайну с сайта
+    http://paletton.com/#uid=33u170kivfabroqeUjDmPcgrY8e
+    -->
+
+    <color name="main_color_primary">#233d4d</color>
+    <color name="main_color_one">#526C7C</color>
+    <color name="main_color_two">#385364</color>
+    <color name="main_color_three">#142F3E</color>
+    <color name="main_color_four">#071D2A</color>
+
+    <color name="secondary_color_primary">#797633</color>
+    <color name="secondary_color_one">#C3BF7D</color>
+    <color name="secondary_color_two">#9C9954</color>
+    <color name="secondary_color_three">#625F1C</color>
+    <color name="secondary_color_four">#413F08</color>
+
+    <color name="tertiary_color_primary">#622948</color>
+    <color name="tertiary_color_one">#9D6584</color>
+    <color name="tertiary_color_two">#7F4464</color>
+    <color name="tertiary_color_three">#4F1735</color>
+    <color name="tertiary_color_four">#350720</color>
+
+
 </resources>
